@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#eef7ff" />
+<title>E-Pulse | Controle de Vendas</title>
+<style>
+:root{--yellow:#f5c400;--yellow2:#ffdf4a;--bg:#0c0d0f;--panel:#14161a;--panel2:#1b1e23;--text:#f7f7f7;--muted:#9ca3af;--line:#292d34;--green:#44d17a;--red:#ff6b6b;--blue:#5da9ff;--shadow:0 18px 45px rgba(0,0,0,.25)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:linear-gradient(180deg,#0a0b0d,#101216 45%,#0b0c0e);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;min-height:100vh}.app{display:grid;grid-template-columns:250px 1fr;min-height:100vh}.sidebar{position:sticky;top:0;height:100vh;padding:22px 16px;border-right:1px solid var(--line);background:rgba(10,11,13,.94);backdrop-filter:blur(18px)}.brand{display:flex;align-items:center;gap:11px;font-weight:900;letter-spacing:.4px;margin:2px 8px 28px}.logo{width:38px;height:38px;border-radius:12px;background:var(--yellow);color:#111;display:grid;place-items:center;font-weight:1000;box-shadow:0 8px 24px rgba(245,196,0,.22)}.brand small{display:block;font-size:11px;color:var(--muted);font-weight:600;margin-top:2px}.nav{display:grid;gap:7px}.nav button{border:0;background:transparent;color:#c9cbd0;padding:12px 13px;border-radius:12px;text-align:left;font-weight:750;font-size:14px;cursor:pointer}.nav button:hover,.nav button.active{background:var(--panel2);color:#fff}.nav button.active{box-shadow:inset 3px 0 0 var(--yellow)}.side-bottom{position:absolute;bottom:18px;left:16px;right:16px}.storage-note{font-size:11px;line-height:1.45;color:#777f8b;padding:12px;background:#111318;border:1px solid #20242a;border-radius:12px}.main{padding:28px 30px 70px;min-width:0}.topbar{display:flex;justify-content:space-between;align-items:flex-start;gap:18px;margin-bottom:24px}.topbar h1{font-size:30px;line-height:1.1;margin:0 0 7px}.sub{color:var(--muted);font-size:14px}.actions{display:flex;gap:8px;flex-wrap:wrap}.btn{border:1px solid var(--line);background:var(--panel2);color:#fff;padding:10px 14px;border-radius:11px;font-weight:800;cursor:pointer}.btn:hover{filter:brightness(1.08)}.btn.primary{background:var(--yellow);border-color:var(--yellow);color:#111}.btn.danger{color:#ffc3c3}.section{display:none}.section.active{display:block}.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:15px}.card{background:linear-gradient(180deg,#16181d,#121419);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow)}.kpi{padding:18px}.kpi-label{color:var(--muted);font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.7px}.kpi-value{font-size:25px;font-weight:950;margin:9px 0 3px;white-space:nowrap}.kpi-detail{font-size:12px;color:#7f8792}.kpi.yellow{border-color:rgba(245,196,0,.38)}.kpi.yellow .kpi-value{color:var(--yellow2)}.grid2{display:grid;grid-template-columns:1.35fr .65fr;gap:14px}.panel{padding:18px}.panel h3{margin:0 0 13px;font-size:16px}.panel-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}.panel-head h3{margin:0}.filter-row{display:flex;gap:8px;flex-wrap:wrap}.input,.select{width:100%;background:#0e1013;border:1px solid #2a2e35;color:#fff;border-radius:10px;padding:10px 11px;outline:none}.input:focus,.select:focus{border-color:#6f610e;box-shadow:0 0 0 3px rgba(245,196,0,.08)}.small-input{max-width:190px}.table-wrap{overflow:auto;border:1px solid var(--line);border-radius:13px}.table{width:100%;border-collapse:collapse;min-width:850px}.table th{position:sticky;top:0;background:#191c21;color:#aeb4bd;font-size:11px;text-transform:uppercase;letter-spacing:.6px;text-align:left;padding:11px;border-bottom:1px solid var(--line)}.table td{padding:11px;border-bottom:1px solid #22262c;font-size:13px;vertical-align:middle}.table tr:last-child td{border-bottom:0}.money{font-variant-numeric:tabular-nums;font-weight:800}.positive{color:var(--green)}.negative{color:var(--red)}.tag{display:inline-flex;align-items:center;padding:5px 8px;border-radius:999px;background:#20242a;border:1px solid #2e333b;color:#d9dbe0;font-size:11px;font-weight:800;white-space:nowrap}.tag.ok{background:rgba(68,209,122,.08);border-color:rgba(68,209,122,.25);color:#82e7a9}.tag.wait{background:rgba(245,196,0,.08);border-color:rgba(245,196,0,.24);color:#ffe27a}.tag.cancel{background:rgba(255,107,107,.08);border-color:rgba(255,107,107,.2);color:#ff9f9f}.icon-btn{border:0;background:#22262d;color:#cfd3da;border-radius:8px;padding:7px 9px;cursor:pointer}.icon-btn:hover{background:#303640}.empty{padding:28px;text-align:center;color:#777f8a}.bars{display:grid;gap:10px}.bar-row{display:grid;grid-template-columns:80px 1fr 80px;align-items:center;gap:8px;font-size:12px}.bar-track{height:10px;background:#24282f;border-radius:999px;overflow:hidden}.bar-fill{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--yellow),#ffe06b)}.rank{display:grid;gap:9px}.rank-item{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid #23272d}.rank-item:last-child{border-bottom:0}.rank-item span{color:#afb5bd;font-size:13px}.rank-item strong{font-size:13px}.form-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:11px}.field{grid-column:span 4}.field.half{grid-column:span 6}.field.full{grid-column:1/-1}.field.quarter{grid-column:span 3}.label{display:block;color:#a9afb8;font-size:12px;font-weight:800;margin:0 0 6px}.helper{font-size:11px;color:#717985;margin-top:5px}.form-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:16px}.summary-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:14px;padding:12px;background:#0f1115;border:1px solid #252931;border-radius:12px}.sum-cell small{display:block;color:#737c87;font-size:10px;text-transform:uppercase;font-weight:900}.sum-cell strong{display:block;margin-top:4px;font-size:14px}.modal{position:fixed;inset:0;background:rgba(0,0,0,.72);display:none;align-items:center;justify-content:center;padding:18px;z-index:50}.modal.open{display:flex}.modal-box{width:min(880px,100%);max-height:92vh;overflow:auto;background:#14171b;border:1px solid #30353d;border-radius:20px;box-shadow:0 30px 90px rgba(0,0,0,.55);padding:21px}.modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:17px}.modal-head h2{margin:0;font-size:20px}.close{border:0;background:#23272e;color:#fff;border-radius:10px;width:36px;height:36px;cursor:pointer}.warning{padding:11px 12px;border:1px solid rgba(245,196,0,.26);background:rgba(245,196,0,.06);border-radius:11px;color:#d9cc8c;font-size:12px;line-height:1.45}.progress{height:12px;background:#22262d;border-radius:999px;overflow:hidden}.progress > div{height:100%;background:var(--yellow);border-radius:999px}.toolbar{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:12px;flex-wrap:wrap}.toolbar-left{display:flex;gap:8px;flex-wrap:wrap}.metric-line{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid #252930;font-size:13px}.metric-line:last-child{border-bottom:0}.muted{color:var(--muted)}.settings-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.danger-zone{border-color:rgba(255,107,107,.24)}
+@media(max-width:1050px){.kpis{grid-template-columns:repeat(2,1fr)}.grid2{grid-template-columns:1fr}.app{grid-template-columns:84px 1fr}.sidebar{padding:18px 10px}.brand div:last-child,.nav button span,.storage-note{display:none}.brand{justify-content:center;margin-left:0;margin-right:0}.nav button{text-align:center;padding:12px}.side-bottom{display:none}}
+@media(max-width:700px){.app{display:block}.sidebar{position:fixed;z-index:20;left:0;right:0;bottom:0;top:auto;height:auto;border-right:0;border-top:1px solid var(--line);padding:7px 7px calc(7px + env(safe-area-inset-bottom));background:rgba(11,12,14,.97)}.brand,.side-bottom{display:none}.nav{grid-template-columns:repeat(4,1fr);gap:4px}.nav button{font-size:11px;padding:9px 4px}.nav button span{display:block}.main{padding:20px 14px 90px}.topbar{align-items:center}.topbar h1{font-size:24px}.actions .btn:not(.primary){display:none}.kpis{grid-template-columns:1fr 1fr;gap:9px}.kpi{padding:14px}.kpi-value{font-size:19px}.form-grid{display:block}.field{margin-bottom:11px}.summary-strip{grid-template-columns:1fr 1fr}.settings-grid{grid-template-columns:1fr}.panel{padding:14px}.small-input{max-width:none}.bar-row{grid-template-columns:70px 1fr 70px}}
+
+/* ===== LIGHT BLUE REDESIGN ===== */
+:root{--yellow:#2f80ed;--yellow2:#55a6ff;--bg:#f4f9ff;--panel:#ffffff;--panel2:#eef6ff;--text:#18324d;--muted:#708399;--line:#dbe9f7;--green:#18a66a;--red:#e45858;--blue:#3b82f6;--shadow:0 10px 30px rgba(37,99,235,.08)}
+body{background:linear-gradient(180deg,#f8fbff 0,#f2f8ff 55%,#edf6ff 100%);color:var(--text)}
+.sidebar{background:rgba(255,255,255,.96);border-right:1px solid var(--line);box-shadow:8px 0 28px rgba(74,144,226,.05)}
+.logo{background:linear-gradient(135deg,#3f8cff,#7ac0ff);color:#fff;box-shadow:0 10px 24px rgba(59,130,246,.24)}
+.brand{color:#17324d}.brand small{color:#8ba0b5}.nav button{color:#637a91}.nav button:hover,.nav button.active{background:#edf6ff;color:#2563b8}.nav button.active{box-shadow:inset 3px 0 0 #4a90e2}.storage-note{background:#f6faff;border-color:#dceaf8;color:#8093a7}
+.topbar h1{color:#18324d}.sub{color:#8193a7}.btn{border-color:#d7e6f6;background:#fff;color:#38546f;box-shadow:0 3px 10px rgba(35,85,140,.04)}.btn.primary{background:linear-gradient(135deg,#3b82f6,#61b1ff);border-color:#3b82f6;color:#fff}.btn.danger{color:#d84c4c;background:#fff6f6}
+.card{background:#fff;border-color:#dfeaf6;box-shadow:var(--shadow)}.kpi{position:relative;overflow:hidden}.kpi:after{content:'';position:absolute;width:88px;height:88px;border-radius:50%;right:-30px;top:-35px;background:rgba(84,166,255,.08)}.kpi.yellow{border-color:#c9e2ff;background:linear-gradient(145deg,#ffffff,#f2f8ff)}.kpi.yellow .kpi-value{color:#2570c9}.kpi-label{color:#7c90a5}.kpi-value{color:#1b3651}.kpi-detail{color:#8ca0b4}
+.input,.select{background:#fbfdff;border-color:#d9e8f6;color:#294761}.input:focus,.select:focus{border-color:#78b7f4;box-shadow:0 0 0 3px rgba(59,130,246,.1)}.label{color:#607990}.helper{color:#8fa1b3}.table-wrap{border-color:#deebf7}.table th{background:#f4f9ff;color:#6e8499;border-color:#e0edf8}.table td{border-color:#edf3f9}.tag{background:#f4f8fc;border-color:#dce8f4;color:#60758a}.tag.ok{background:#eefaf5;border-color:#c9eedc;color:#138b59}.tag.wait{background:#fff8e9;border-color:#f5e4ad;color:#9a7318}.tag.cancel{background:#fff1f1;border-color:#f2d2d2;color:#c84d4d}.icon-btn{background:#eef6ff;color:#3673ad}.icon-btn:hover{background:#deefff}.bar-track{background:#eaf1f8}.bar-fill{background:linear-gradient(90deg,#4b93ea,#83c6ff)}.rank-item{border-color:#edf2f7}.rank-item span{color:#72879a}.summary-strip{background:#f5faff;border-color:#dceaf7}.sum-cell small{color:#8093a6}.modal{background:rgba(27,54,81,.35);backdrop-filter:blur(6px)}.modal-box{background:#fff;border-color:#dbe8f4;box-shadow:0 30px 90px rgba(41,80,120,.24)}.close{background:#eef6ff;color:#315f8b}.warning{border-color:#cfe4f8;background:#f4f9ff;color:#5f7890}.progress{background:#e8f1fa}.progress>div{background:linear-gradient(90deg,#4a8fe4,#72bdff)}.metric-line{border-color:#eaf1f7}.danger-zone{border-color:#f1d7d7}
+.analytics-grid{display:grid;grid-template-columns:1.4fr .6fr;gap:14px;margin-top:14px}.chart-card{min-height:330px}.chart-wrap{height:270px;position:relative}.mini-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:14px 0}.mini-card{padding:16px}.mini-card .kpi-value{font-size:21px}.insight{padding:12px 14px;background:#f6faff;border:1px solid #dceaf8;border-radius:12px;font-size:12px;color:#607991;line-height:1.5}.panel h3{color:#294761}
+@media(max-width:1050px){.analytics-grid{grid-template-columns:1fr}.mini-grid{grid-template-columns:1fr 1fr 1fr}}
+@media(max-width:700px){.sidebar{background:rgba(255,255,255,.97)}.mini-grid{grid-template-columns:1fr 1fr}.chart-wrap{height:240px}.analytics-grid{grid-template-columns:1fr}.nav button{color:#60778f}.nav button.active{background:#eaf5ff;color:#246cb3}.main{background:transparent}}
+
+
+/* ===== FIREBASE AUTH / SECURITY ===== */
+body.auth-loading{overflow:hidden}
+.app{display:none}
+body.authenticated .app{display:grid}
+.auth-gate{position:fixed;inset:0;z-index:1000;display:grid;place-items:center;padding:22px;background:radial-gradient(circle at 20% 10%,#dcedff 0,transparent 34%),linear-gradient(160deg,#f9fcff 0%,#eef7ff 58%,#e7f3ff 100%)}
+body.authenticated .auth-gate{display:none}
+.auth-card{width:min(440px,100%);background:#fff;border:1px solid #dceaf8;border-radius:28px;padding:30px;box-shadow:0 28px 80px rgba(43,116,184,.16)}
+.auth-logo{width:58px;height:58px;border-radius:18px;display:grid;place-items:center;background:linear-gradient(135deg,#3f8cff,#7ac0ff);color:white;font-size:26px;font-weight:950;box-shadow:0 12px 32px rgba(59,130,246,.24);margin-bottom:22px}
+.auth-card h1{font-size:28px;line-height:1.1;margin:0 0 9px;color:#18324d}.auth-card p{margin:0;color:#71869b;font-size:14px;line-height:1.6}.auth-google{width:100%;margin-top:24px;height:52px;border:1px solid #d9e7f5;background:#fff;border-radius:14px;color:#27445f;font-size:15px;font-weight:850;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:11px;box-shadow:0 7px 22px rgba(54,111,165,.07)}.auth-google:hover{background:#f7fbff;border-color:#bcd8f2}.gmark{width:24px;height:24px;border-radius:50%;display:grid;place-items:center;background:#fff;border:1px solid #e4e8ee;font-weight:950;color:#4285f4;font-family:Arial,sans-serif}
+.auth-status{min-height:20px;margin-top:14px!important;font-size:12px!important;text-align:center}.auth-status.error{color:#d64d4d}.auth-security{margin-top:22px;padding:13px 14px;background:#f3f9ff;border:1px solid #d9eafb;border-radius:14px;font-size:12px;color:#668097;line-height:1.5}.auth-security strong{color:#2e6da7}.auth-accounts{margin-top:10px;font-size:11px;color:#93a4b5;text-align:center;word-break:break-all}
+.user-box{display:flex;align-items:center;gap:9px;padding:7px 9px;background:#fff;border:1px solid #dbe9f7;border-radius:13px;box-shadow:0 5px 18px rgba(52,104,155,.05)}.user-avatar{width:30px;height:30px;border-radius:50%;object-fit:cover;background:#e9f3fd}.user-meta{line-height:1.05;max-width:150px}.user-meta strong{display:block;font-size:11px;color:#23425f;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.user-meta span{display:block;font-size:9px;color:#8aa0b4;margin-top:4px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.logout-btn{border:0;background:#eef6ff;color:#3975ac;border-radius:9px;padding:7px 9px;font-size:11px;font-weight:800;cursor:pointer}.sync-pill{display:inline-flex;align-items:center;gap:6px;font-size:10px;font-weight:800;color:#4f7b9e}.sync-dot{width:7px;height:7px;border-radius:50%;background:#20b579;box-shadow:0 0 0 3px rgba(32,181,121,.10)}.sync-dot.saving{background:#e8a82b}.sync-dot.error{background:#df5a5a}.firebase-note{background:#eff8ff!important;border-color:#d4e9fa!important;color:#66839d!important}.firebase-note strong{color:#2e6ea8}
+@media(max-width:700px){body.authenticated .app{display:block}.auth-card{padding:24px;border-radius:22px}.auth-card h1{font-size:25px}.user-meta{display:none}.user-box{padding:6px}.logout-btn{padding:7px}.topbar{gap:9px}.actions{gap:6px}}
+
+</style>
+</head>
+<body class="auth-loading">
+
+<div class="auth-gate" id="authGate">
+  <div class="auth-card">
+    <div class="auth-logo">E</div>
+    <h1>Controle de Vendas</h1>
+    <p>Acesso privado ao seu painel de vendas, lucros e comissões.</p>
+    <button class="auth-google" id="googleLoginBtn"><span class="gmark">G</span>Entrar com Google</button>
+    <p class="auth-status" id="authStatus">Faça login com sua conta Google.</p>
+    <div class="auth-security"><strong>Proteção:</strong> o acesso exige autenticação com uma conta Google. Sem login, ninguém consegue ler nem alterar os dados no Firestore.</div>
+    <div class="auth-accounts">Acesso permitido: cw447880@gmail.com · carloswesley299@gmail.com</div>
+  </div>
+</div>
+
+<div class="app">
+<aside class="sidebar">
+  <div class="brand"><div class="logo">E</div><div>E-PULSE <small>Controle de Vendas</small></div></div>
+  <nav class="nav">
+    <button class="active" data-section="dashboard">▦ <span>Visão geral</span></button>
+    <button data-section="sales">▤ <span>Vendas</span></button>
+    <button data-section="commissions">R$ <span>Comissões</span></button>
+    <button data-section="settings">⚙ <span>Dados</span></button>
+  </nav>
+  <div class="side-bottom"><div class="storage-note"><strong>Firebase protegido</strong><br>Dados sincronizados na nuvem e disponíveis somente após login Google.</div></div>
+</aside>
+<main class="main">
+  <div class="topbar">
+    <div><h1 id="pageTitle">Visão geral</h1><div class="sub" id="pageSub">Acompanhe vendas, lucro e comissão em um só lugar.</div></div>
+    <div class="actions"><button class="btn" id="exportBtn">Backup</button><button class="btn primary" id="newSaleBtn">+ Nova venda</button><div class="user-box"><img class="user-avatar" id="userAvatar" alt=""><div class="user-meta"><strong id="userName">Usuário</strong><span id="userEmail"></span><span class="sync-pill"><i class="sync-dot"></i><b id="syncText">Sincronizado</b></span></div><button class="logout-btn" id="logoutBtn">Sair</button></div></div>
+  </div>
+
+  <section id="dashboard" class="section active">
+    <div class="toolbar"><div class="toolbar-left"><select id="dashMonth" class="select small-input"></select></div></div>
+    <div class="kpis">
+      <div class="card kpi yellow"><div class="kpi-label">Faturamento</div><div class="kpi-value" id="kRevenue">R$ 0</div><div class="kpi-detail" id="kSalesCount">0 vendas</div></div>
+      <div class="card kpi"><div class="kpi-label">Lucro informado</div><div class="kpi-value positive" id="kProfit">R$ 0</div><div class="kpi-detail" id="kMargin">Margem —</div></div>
+      <div class="card kpi"><div class="kpi-label">Minha comissão</div><div class="kpi-value" id="kCommission">R$ 0</div><div class="kpi-detail" id="kCommissionPct">— do lucro informado</div></div>
+      <div class="card kpi"><div class="kpi-label">A receber</div><div class="kpi-value" id="kPending">R$ 0</div><div class="kpi-detail" id="kPaid">R$ 0 já recebido</div></div>
+    </div>
+    <div class="mini-grid">
+      <div class="card mini-card"><div class="kpi-label">Ticket médio</div><div class="kpi-value" id="kTicket">R$ 0</div><div class="kpi-detail">valor médio por venda</div></div>
+      <div class="card mini-card"><div class="kpi-label">Lucro após comissão</div><div class="kpi-value positive" id="kStoreProfit">—</div><div class="kpi-detail">com custos informados</div></div>
+      <div class="card mini-card"><div class="kpi-label">Comissão média</div><div class="kpi-value" id="kAvgCommission">R$ 0</div><div class="kpi-detail">por venda concluída</div></div>
+    </div>
+    <div class="analytics-grid">
+      <div class="card panel chart-card"><div class="panel-head"><h3>Evolução financeira</h3><span class="muted">Faturamento x comissão</span></div><div class="chart-wrap"><canvas id="trendChart"></canvas></div></div>
+      <div class="card panel chart-card"><div class="panel-head"><h3>Formas de pagamento</h3></div><div class="chart-wrap"><canvas id="paymentChart"></canvas></div></div>
+    </div>
+    <div class="analytics-grid">
+      <div class="card panel chart-card"><div class="panel-head"><h3>Vendas por modelo</h3><span class="muted">Top desempenho</span></div><div class="chart-wrap"><canvas id="modelChart"></canvas></div></div>
+      <div class="card panel"><h3>Top modelos</h3><div id="topModels" class="rank"></div><div class="insight" id="dashboardInsight" style="margin-top:14px">Cadastre mais vendas para gerar análises automáticas.</div></div>
+    </div>
+    <div class="grid2" style="margin-top:14px">
+      <div class="card panel"><div class="panel-head"><h3>Últimas vendas</h3><button class="btn" onclick="goSection('sales')">Ver todas</button></div><div id="recentSales"></div></div>
+      <div class="card panel"><h3>Meta mensal</h3><div class="metric-line"><span class="muted">Meta de faturamento</span><strong id="goalRevenueText">R$ 0</strong></div><div class="progress" style="margin:10px 0 14px"><div id="goalRevenueBar" style="width:0%"></div></div><div class="metric-line"><span class="muted">Meta de comissão</span><strong id="goalCommissionText">R$ 0</strong></div><div class="progress" style="margin-top:10px"><div id="goalCommissionBar" style="width:0%"></div></div></div>
+    </div>
+  </section>
+
+  <section id="sales" class="section">
+    <div class="card panel">
+      <div class="toolbar"><div class="toolbar-left"><input class="input small-input" id="salesSearch" placeholder="Buscar cliente ou modelo"><select class="select small-input" id="salesMonth"></select><select class="select small-input" id="salesStatus"><option value="">Todos os status</option><option>Concluída</option><option>Pendente</option><option>Cancelada</option></select></div><div class="muted" id="salesSummary"></div></div>
+      <div class="table-wrap"><table class="table"><thead><tr><th>Data</th><th>Modelo</th><th>Cliente</th><th>Venda</th><th>Lucro</th><th>Comissão</th><th>Recebimento</th><th>Status</th><th></th></tr></thead><tbody id="salesBody"></tbody></table></div>
+    </div>
+  </section>
+
+  <section id="commissions" class="section">
+    <div class="kpis">
+      <div class="card kpi"><div class="kpi-label">Comissão total</div><div class="kpi-value" id="cTotal">R$ 0</div></div>
+      <div class="card kpi"><div class="kpi-label">Recebida</div><div class="kpi-value positive" id="cPaid">R$ 0</div></div>
+      <div class="card kpi"><div class="kpi-label">Pendente</div><div class="kpi-value" id="cPending">R$ 0</div></div>
+      <div class="card kpi"><div class="kpi-label">Ticket médio comissão</div><div class="kpi-value" id="cAvg">R$ 0</div></div>
+    </div>
+    <div class="card panel"><div class="toolbar"><div class="toolbar-left"><select class="select small-input" id="commissionMonth"></select></div></div><div class="table-wrap"><table class="table"><thead><tr><th>Data</th><th>Venda</th><th>Cliente</th><th>Lucro</th><th>Regra</th><th>Comissão</th><th>Situação</th><th></th></tr></thead><tbody id="commissionBody"></tbody></table></div></div>
+  </section>
+
+  <section id="settings" class="section">
+    <div class="settings-grid">
+      <div class="card panel"><h3>Metas</h3><label class="label">Meta mensal de faturamento</label><input id="goalRevenue" class="input" type="number" step="0.01"><label class="label" style="margin-top:12px">Meta mensal de comissão</label><input id="goalCommission" class="input" type="number" step="0.01"><div class="form-actions"><button class="btn primary" id="saveGoals">Salvar metas</button></div></div>
+      <div class="card panel"><h3>Backup dos dados</h3><p class="muted" style="font-size:13px;line-height:1.55">Seus dados são sincronizados pelo Firebase. Você também pode exportar uma cópia local em JSON ou CSV.</p><div class="actions"><button class="btn" id="backupJson">Exportar JSON</button><button class="btn" id="exportCsv">Exportar CSV</button><button class="btn" id="importJsonBtn">Importar JSON</button><input id="importJson" type="file" accept="application/json" hidden></div></div>
+      <div class="card panel danger-zone"><h3>Manutenção</h3><p class="muted" style="font-size:13px;line-height:1.55">Apaga todas as vendas e configurações da nuvem. Use somente depois de fazer backup.</p><button class="btn danger" id="resetBtn">Apagar dados da nuvem</button></div>
+      <div class="card panel"><h3>Sobre este app</h3><div class="warning"><strong>Firebase conectado.</strong> O aplicativo usa Google Login e Firestore. O banco exige autenticação Google para leitura e gravação.</div></div>
+    </div>
+  </section>
+</main>
+</div>
+
+<div class="modal" id="saleModal"><div class="modal-box"><div class="modal-head"><h2 id="modalTitle">Nova venda</h2><button class="close" id="closeModal">✕</button></div>
+<form id="saleForm">
+<input type="hidden" id="saleId">
+<div class="form-grid">
+  <div class="field quarter"><label class="label">Data *</label><input id="date" class="input" type="date" required></div>
+  <div class="field"><label class="label">Modelo / produto *</label><input id="product" class="input" required placeholder="Ex.: Storm branca"></div>
+  <div class="field"><label class="label">Cliente *</label><input id="client" class="input" required placeholder="Nome do cliente"></div>
+  <div class="field quarter"><label class="label">Status</label><select id="status" class="select"><option>Concluída</option><option>Pendente</option><option>Cancelada</option></select></div>
+  <div class="field"><label class="label">Valor da venda *</label><input id="saleValue" class="input" type="number" min="0" step="0.01" required></div>
+  <div class="field"><label class="label">Custo total da venda</label><input id="cost" class="input" type="number" min="0" step="0.01" placeholder="Opcional"><div class="helper">Preço de custo + despesas diretamente ligadas à venda.</div></div>
+  <div class="field"><label class="label">Forma de pagamento</label><select id="payment" class="select"><option value="">Não informado</option><option>Pix</option><option>Dinheiro</option><option>Cartão</option><option>Link de pagamento</option><option>Outro</option></select></div>
+  <div class="field"><label class="label">Tipo da comissão</label><select id="commissionType" class="select"><option value="fixed">Valor fixo</option><option value="profitPercent">% do lucro</option></select></div>
+  <div class="field"><label class="label" id="commissionValueLabel">Valor da comissão</label><input id="commissionValue" class="input" type="number" min="0" step="0.01"></div>
+  <div class="field"><label class="label">Comissão</label><select id="commissionStatus" class="select"><option value="pending">A receber</option><option value="paid">Recebida</option></select></div>
+  <div class="field full"><label class="label">Observações</label><textarea id="notes" class="input" rows="3" placeholder="Entrada, cor, pendência, observação da negociação..."></textarea></div>
+</div>
+<div class="summary-strip"><div class="sum-cell"><small>Venda</small><strong id="previewSale">R$ 0</strong></div><div class="sum-cell"><small>Lucro</small><strong id="previewProfit">—</strong></div><div class="sum-cell"><small>Comissão</small><strong id="previewCommission">R$ 0</strong></div><div class="sum-cell"><small>Loja após comissão</small><strong id="previewStore">—</strong></div></div>
+<div class="form-actions"><button class="btn" type="button" id="cancelModal">Cancelar</button><button class="btn primary" type="submit">Salvar venda</button></div>
+</form></div></div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
+import { getAuth, GoogleAuthProvider, signInWithPopup, signInWithRedirect, getRedirectResult, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
+import { getFirestore, doc, getDoc, setDoc, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyC1wLUtpyx0lP7JsOd3iewA31VTP6yvmLg",
+  authDomain: "venda-814cb.firebaseapp.com",
+  projectId: "venda-814cb",
+  storageBucket: "venda-814cb.firebasestorage.app",
+  messagingSenderId: "1022652108022",
+  appId: "1:1022652108022:web:8e237fcd5cbade4e4570d7"
+};
+
+const firebaseApp = initializeApp(firebaseConfig);
+const auth = getAuth(firebaseApp);
+const firestore = getFirestore(firebaseApp);
+const provider = new GoogleAuthProvider();
+provider.setCustomParameters({ prompt: "select_account" });
+const CLOUD_DOC = doc(firestore, "appData", "main");
+let currentUser = null;
+let stopCloudListener = null;
+let cloudReady = false;
+
+const KEY='epulse_sales_control_v1';
+const defaultData={
+  sales:[
+    {id:'seed1',date:'2026-08-01',product:'QUICK 3 / PRETA',client:'DIRCEU',saleValue:4100,cost:null,commissionType:'fixed',commissionValue:600,commissionStatus:'paid',payment:'PicPay',status:'Concluída',notes:'Importado da planilha original'},
+    {id:'seed2',date:'2026-07-04',product:'FOSTON X12 / VERMELHA',client:'LUCAS / DANIEL',saleValue:9500,cost:null,commissionType:'fixed',commissionValue:1064,commissionStatus:'paid',payment:'',status:'Concluída',notes:'Importado da planilha original'},
+    {id:'seed3',date:'2026-08-11',product:'STORM / DRIFIT',client:'RONALDO CRUZETA',saleValue:10300,cost:null,commissionType:'fixed',commissionValue:880,commissionStatus:'paid',payment:'',status:'Concluída',notes:'Importado da planilha original'},
+    {id:'seed4',date:'2026-08-23',product:'DRIFIT',client:'JOSÉ BARZAN',saleValue:1500,cost:null,commissionType:'fixed',commissionValue:50,commissionStatus:'paid',payment:'',status:'Concluída',notes:'Importado da planilha original'},
+    {id:'seed5',date:'2026-08-14',product:'MINI JUMP',client:'VITOR',saleValue:1700,cost:null,commissionType:'fixed',commissionValue:54,commissionStatus:'paid',payment:'',status:'Concluída',notes:'Importado da planilha original'},
+    {id:'seed6',date:'2026-08-03',product:'EAGLE / BRANCA',client:'SAMUEL',saleValue:6500,cost:null,commissionType:'fixed',commissionValue:300,commissionStatus:'paid',payment:'',status:'Concluída',notes:'Importado da planilha original'},
+    {id:'seed7',date:'2026-08-23',product:'G2 PRO / AZUL',client:'MAXWEL',saleValue:5500,cost:null,commissionType:'fixed',commissionValue:200,commissionStatus:'paid',payment:'',status:'Concluída',notes:'Importado da planilha original'},
+    {id:'seed8',date:'2026-08-19',product:'STORM / BRANCA',client:'FRANCIELE GOES',saleValue:8300,cost:null,commissionType:'fixed',commissionValue:736,commissionStatus:'pending',payment:'',status:'Concluída',notes:'Importado da planilha original'},
+    {id:'seed9',date:'2026-08-22',product:'POP 800W',client:'LUIZA MULLER',saleValue:5000,cost:null,commissionType:'fixed',commissionValue:500,commissionStatus:'pending',payment:'',status:'Concluída',notes:'Importado da planilha original'},
+    {id:'seed10',date:'2026-08-22',product:'FOSTON X15 / BRANCA',client:'RAIMUNDA DE MORAES',saleValue:7850,cost:null,commissionType:'fixed',commissionValue:986,commissionStatus:'pending',payment:'',status:'Concluída',notes:'Importado da planilha original'},
+    {id:'seed11',date:'2026-08-24',product:'EFLOW E4 BRANCA',client:'RAUANE SANTOS',saleValue:5500,cost:null,commissionType:'fixed',commissionValue:0,commissionStatus:'pending',payment:'',status:'Concluída',notes:'Data não constava claramente na planilha; ajuste se necessário.'}
+  ],goals:{revenue:70000,commission:5000}
+};
+let db=loadLocal();
+function loadLocal(){try{const v=JSON.parse(localStorage.getItem(KEY));return v&&v.sales?v:structuredClone(defaultData)}catch(e){return structuredClone(defaultData)}}
+function setSyncState(state,text=''){const dot=document.querySelector('.sync-dot');if(dot){dot.className='sync-dot'+(state==='saving'?' saving':state==='error'?' error':'')}const el=document.getElementById('syncText');if(el)el.textContent=text||({saving:'Salvando…',error:'Erro de sincronização',ok:'Sincronizado'}[state]||'')}
+async function save(){
+  localStorage.setItem(KEY,JSON.stringify(db));
+  renderAll();
+  if(!currentUser||!cloudReady)return;
+  setSyncState('saving');
+  try{await setDoc(CLOUD_DOC,{data:db,updatedAt:serverTimestamp(),updatedBy:currentUser.email},{merge:true});setSyncState('ok')}
+  catch(err){console.error(err);setSyncState('error');alert('Não foi possível sincronizar com o Firebase. Verifique sua conexão e as regras do Firestore.')}
+}
+const brl=v=>new Intl.NumberFormat('pt-BR',{style:'currency',currency:'BRL'}).format(Number(v)||0);
+const parseDate=s=>{if(!s)return '';const [y,m,d]=s.split('-');return `${d}/${m}/${y}`};
+const monthKey=d=>String(d||'').slice(0,7);
+const monthLabel=k=>{if(k==='all')return 'Todos os meses';const [y,m]=k.split('-');const n=['JAN','FEV','MAR','ABR','MAI','JUN','JUL','AGO','SET','OUT','NOV','DEZ'];return `${n[Number(m)-1]}/${y}`};
+function commission(s){if(s.commissionType==='profitPercent'){const p=profit(s);return p==null?0:Math.max(0,p)*(Number(s.commissionValue)||0)/100}return Number(s.commissionValue)||0}
+function profit(s){if(s.cost===null||s.cost===''||typeof s.cost==='undefined')return null;return (Number(s.saleValue)||0)-(Number(s.cost)||0)}
+function storeProfit(s){const p=profit(s);return p==null?null:p-commission(s)}
+function activeSales(){return db.sales.filter(s=>s.status!=='Cancelada')}
+function months(){const set=new Set(db.sales.map(s=>monthKey(s.date)).filter(Boolean));return [...set].sort().reverse()}
+function fillMonths(){['dashMonth','salesMonth','commissionMonth'].forEach(id=>{const el=document.getElementById(id),old=el.value||months()[0]||'all';el.innerHTML='<option value="all">Todos os meses</option>'+months().map(m=>`<option value="${m}">${monthLabel(m)}</option>`).join('');el.value=[...el.options].some(o=>o.value===old)?old:(months()[0]||'all')})}
+function filterMonth(arr,key){return key&&key!=='all'?arr.filter(s=>monthKey(s.date)===key):arr}
+function escapeHtml(v=''){return String(v).replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#039;','"':'&quot;'}[c]))}
+let trendChart,paymentChart,modelChart;
+function destroyChart(c){if(c&&typeof c.destroy==='function')c.destroy()}
+function renderCharts(arr){
+  if(typeof Chart==='undefined')return;
+  const monthly={}; activeSales().forEach(s=>{const m=monthKey(s.date); if(!m)return; monthly[m]??={revenue:0,commission:0}; monthly[m].revenue+=Number(s.saleValue)||0; monthly[m].commission+=commission(s)});
+  const keys=Object.keys(monthly).sort().slice(-8);
+  destroyChart(trendChart); trendChart=new Chart(document.getElementById('trendChart'),{type:'line',data:{labels:keys.map(monthLabel),datasets:[{label:'Faturamento',data:keys.map(k=>monthly[k].revenue),tension:.35,fill:true,borderWidth:2},{label:'Comissão',data:keys.map(k=>monthly[k].commission),tension:.35,borderWidth:2}]},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},plugins:{legend:{position:'bottom'}},scales:{y:{beginAtZero:true,ticks:{callback:v=>'R$ '+Number(v).toLocaleString('pt-BR')}}}}});
+  const pay={}; arr.forEach(s=>{const k=s.payment||'Não informado';pay[k]=(pay[k]||0)+1});
+  destroyChart(paymentChart); paymentChart=new Chart(document.getElementById('paymentChart'),{type:'doughnut',data:{labels:Object.keys(pay),datasets:[{data:Object.values(pay)}]},options:{responsive:true,maintainAspectRatio:false,cutout:'68%',plugins:{legend:{position:'bottom'}}}});
+  const mods={}; arr.forEach(s=>mods[s.product]=(mods[s.product]||0)+(Number(s.saleValue)||0)); const top=Object.entries(mods).sort((a,b)=>b[1]-a[1]).slice(0,7);
+  destroyChart(modelChart); modelChart=new Chart(document.getElementById('modelChart'),{type:'bar',data:{labels:top.map(x=>x[0]),datasets:[{label:'Faturamento',data:top.map(x=>x[1]),borderRadius:8}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{beginAtZero:true,ticks:{callback:v=>'R$ '+Number(v).toLocaleString('pt-BR')}}}}});
+}
+function renderDashboard(){const key=document.getElementById('dashMonth').value||'all';const arr=filterMonth(activeSales(),key);const revenue=arr.reduce((a,s)=>a+Number(s.saleValue||0),0);const profits=arr.map(profit).filter(v=>v!==null);const profitTotal=profits.reduce((a,v)=>a+v,0);const comm=arr.reduce((a,s)=>a+commission(s),0);const pend=arr.filter(s=>s.commissionStatus!=='paid').reduce((a,s)=>a+commission(s),0);const paid=comm-pend;const storeProfits=arr.map(storeProfit).filter(v=>v!==null);const storeProfitTotal=storeProfits.reduce((a,v)=>a+v,0);document.getElementById('kTicket').textContent=brl(arr.length?revenue/arr.length:0);document.getElementById('kStoreProfit').textContent=storeProfits.length?brl(storeProfitTotal):'—';document.getElementById('kAvgCommission').textContent=brl(arr.length?comm/arr.length:0);renderCharts(arr);document.getElementById('kRevenue').textContent=brl(revenue);document.getElementById('kSalesCount').textContent=`${arr.length} ${arr.length===1?'venda':'vendas'}`;document.getElementById('kProfit').textContent=profits.length?brl(profitTotal):'—';document.getElementById('kMargin').textContent=profits.length&&revenue?`Margem parcial ${(profitTotal/revenue*100).toFixed(1)}%`:'Cadastre os custos para calcular';document.getElementById('kCommission').textContent=brl(comm);document.getElementById('kCommissionPct').textContent=profits.length&&profitTotal?`${(comm/profitTotal*100).toFixed(1)}% do lucro informado`:'Comissões cadastradas';document.getElementById('kPending').textContent=brl(pend);document.getElementById('kPaid').textContent=`${brl(paid)} já recebido`;
+  const byDay={};arr.forEach(s=>{byDay[s.date]=(byDay[s.date]||0)+Number(s.saleValue||0)});const entries=Object.entries(byDay).sort((a,b)=>a[0].localeCompare(b[0]));const max=Math.max(1,...entries.map(x=>x[1]));document.getElementById('dailyBars').innerHTML=entries.length?entries.slice(-12).map(([d,v])=>`<div class="bar-row"><span>${parseDate(d).slice(0,5)}</span><div class="bar-track"><div class="bar-fill" style="width:${Math.max(3,v/max*100)}%"></div></div><strong>${brl(v).replace(',00','')}</strong></div>`).join(''):'<div class="empty">Nenhuma venda neste período.</div>';document.getElementById('chartCaption').textContent=monthLabel(key);
+  const models={};arr.forEach(s=>models[s.product]=(models[s.product]||0)+Number(s.saleValue||0));const top=Object.entries(models).sort((a,b)=>b[1]-a[1]).slice(0,5);document.getElementById('topModels').innerHTML=top.length?top.map(([n,v],i)=>`<div class="rank-item"><span>${i+1}. ${escapeHtml(n)}</span><strong>${brl(v)}</strong></div>`).join(''):'<div class="empty">Sem dados.</div>';
+  const rec=[...arr].sort((a,b)=>b.date.localeCompare(a.date)).slice(0,5);document.getElementById('recentSales').innerHTML=rec.length?`<div class="table-wrap"><table class="table" style="min-width:600px"><thead><tr><th>Data</th><th>Modelo</th><th>Cliente</th><th>Venda</th><th>Comissão</th></tr></thead><tbody>${rec.map(s=>`<tr><td>${parseDate(s.date)}</td><td>${escapeHtml(s.product)}</td><td>${escapeHtml(s.client)}</td><td class="money">${brl(s.saleValue)}</td><td class="money">${brl(commission(s))}</td></tr>`).join('')}</tbody></table></div>`:'<div class="empty">Nenhuma venda.</div>';
+  const rg=Number(db.goals?.revenue)||0,cg=Number(db.goals?.commission)||0;document.getElementById('goalRevenueText').textContent=rg?`${brl(revenue)} / ${brl(rg)}`:'Não definida';document.getElementById('goalCommissionText').textContent=cg?`${brl(comm)} / ${brl(cg)}`:'Não definida';document.getElementById('goalRevenueBar').style.width=rg?`${Math.min(100,revenue/rg*100)}%`:'0%';document.getElementById('goalCommissionBar').style.width=cg?`${Math.min(100,comm/cg*100)}%`:'0%';const best=Object.entries(arr.reduce((o,s)=>(o[s.product]=(o[s.product]||0)+Number(s.saleValue||0),o),{})).sort((a,b)=>b[1]-a[1])[0];const insight=document.getElementById('dashboardInsight');if(insight)insight.textContent=arr.length?`No período você fez ${arr.length} venda(s), com ticket médio de ${brl(arr.length?revenue/arr.length:0)}.${best?` O modelo com maior faturamento foi ${best[0]}, com ${brl(best[1])}.`:''} Comissão total: ${brl(comm)}.`:'Sem vendas neste período.';
+}
+function statusTag(s){return s==='Concluída'?'<span class="tag ok">Concluída</span>':s==='Cancelada'?'<span class="tag cancel">Cancelada</span>':'<span class="tag wait">Pendente</span>'}
+function renderSales(){const q=(document.getElementById('salesSearch').value||'').toLowerCase(),m=document.getElementById('salesMonth').value||'all',st=document.getElementById('salesStatus').value;let arr=filterMonth(db.sales,m).filter(s=>(!st||s.status===st)&&(!q||`${s.client} ${s.product}`.toLowerCase().includes(q)));arr.sort((a,b)=>b.date.localeCompare(a.date));const body=document.getElementById('salesBody');body.innerHTML=arr.length?arr.map(s=>{const p=profit(s);return `<tr><td>${parseDate(s.date)}</td><td><strong>${escapeHtml(s.product)}</strong></td><td>${escapeHtml(s.client)}</td><td class="money">${brl(s.saleValue)}</td><td class="money ${p!=null&&p>=0?'positive':p!=null?'negative':''}">${p==null?'—':brl(p)}</td><td class="money">${brl(commission(s))}</td><td>${s.commissionStatus==='paid'?'<span class="tag ok">Recebida</span>':'<span class="tag wait">A receber</span>'}</td><td>${statusTag(s.status)}</td><td><button class="icon-btn" onclick="editSale('${s.id}')">Editar</button></td></tr>`}).join(''):'<tr><td colspan="9" class="empty">Nenhuma venda encontrada.</td></tr>';const total=arr.filter(s=>s.status!=='Cancelada').reduce((a,s)=>a+Number(s.saleValue||0),0);document.getElementById('salesSummary').textContent=`${arr.length} registros · ${brl(total)}`}
+function renderCommissions(){const m=document.getElementById('commissionMonth').value||'all';const arr=filterMonth(activeSales(),m).sort((a,b)=>b.date.localeCompare(a.date));const total=arr.reduce((a,s)=>a+commission(s),0),paid=arr.filter(s=>s.commissionStatus==='paid').reduce((a,s)=>a+commission(s),0);document.getElementById('cTotal').textContent=brl(total);document.getElementById('cPaid').textContent=brl(paid);document.getElementById('cPending').textContent=brl(total-paid);document.getElementById('cAvg').textContent=brl(arr.length?total/arr.length:0);document.getElementById('commissionBody').innerHTML=arr.length?arr.map(s=>{const p=profit(s),rule=s.commissionType==='profitPercent'?`${Number(s.commissionValue)||0}% do lucro`:'Valor fixo';return `<tr><td>${parseDate(s.date)}</td><td>${escapeHtml(s.product)}</td><td>${escapeHtml(s.client)}</td><td class="money">${p==null?'—':brl(p)}</td><td>${rule}</td><td class="money">${brl(commission(s))}</td><td>${s.commissionStatus==='paid'?'<span class="tag ok">Recebida</span>':'<span class="tag wait">A receber</span>'}</td><td><button class="icon-btn" onclick="toggleCommission('${s.id}')">${s.commissionStatus==='paid'?'Marcar a receber':'Marcar recebida'}</button></td></tr>`}).join(''):'<tr><td colspan="8" class="empty">Nenhuma comissão encontrada.</td></tr>'}
+function renderSettings(){document.getElementById('goalRevenue').value=db.goals?.revenue||'';document.getElementById('goalCommission').value=db.goals?.commission||''}
+function renderAll(){fillMonths();renderDashboard();renderSales();renderCommissions();renderSettings()}
+const pageMeta={dashboard:['Visão geral','Acompanhe vendas, lucro e comissão em um só lugar.'],sales:['Vendas','Cadastre, edite e consulte todo o seu histórico.'],commissions:['Comissões','Veja o que já recebeu e o que ainda está pendente.'],settings:['Dados e backup','Metas, exportação e manutenção dos seus dados.']};
+function goSection(id){document.querySelectorAll('.section').forEach(x=>x.classList.toggle('active',x.id===id));document.querySelectorAll('.nav button').forEach(x=>x.classList.toggle('active',x.dataset.section===id));document.getElementById('pageTitle').textContent=pageMeta[id][0];document.getElementById('pageSub').textContent=pageMeta[id][1];scrollTo({top:0,behavior:'smooth'})}window.goSection=goSection;
+document.querySelectorAll('.nav button').forEach(b=>b.onclick=()=>goSection(b.dataset.section));
+const modal=document.getElementById('saleModal');function openModal(s=null){document.getElementById('saleForm').reset();document.getElementById('saleId').value=s?.id||'';document.getElementById('modalTitle').textContent=s?'Editar venda':'Nova venda';document.getElementById('date').value=s?.date||new Date().toISOString().slice(0,10);document.getElementById('product').value=s?.product||'';document.getElementById('client').value=s?.client||'';document.getElementById('status').value=s?.status||'Concluída';document.getElementById('saleValue').value=s?.saleValue??'';document.getElementById('cost').value=s?.cost??'';document.getElementById('payment').value=s?.payment||'';document.getElementById('commissionType').value=s?.commissionType||'fixed';document.getElementById('commissionValue').value=s?.commissionValue??'';document.getElementById('commissionStatus').value=s?.commissionStatus||'pending';document.getElementById('notes').value=s?.notes||'';modal.classList.add('open');updatePreview()}
+function closeModal(){modal.classList.remove('open')}document.getElementById('newSaleBtn').onclick=()=>openModal();document.getElementById('closeModal').onclick=closeModal;document.getElementById('cancelModal').onclick=closeModal;modal.onclick=e=>{if(e.target===modal)closeModal()};
+function editSale(id){openModal(db.sales.find(s=>s.id===id))}window.editSale=editSale;
+function updatePreview(){const sv=Number(document.getElementById('saleValue').value)||0,costRaw=document.getElementById('cost').value,type=document.getElementById('commissionType').value,cv=Number(document.getElementById('commissionValue').value)||0,p=costRaw===''?null:sv-Number(costRaw),c=type==='profitPercent'?(p==null?0:Math.max(0,p)*cv/100):cv;document.getElementById('commissionValueLabel').textContent=type==='profitPercent'?'Percentual da comissão (%)':'Valor da comissão';document.getElementById('previewSale').textContent=brl(sv);document.getElementById('previewProfit').textContent=p==null?'—':brl(p);document.getElementById('previewCommission').textContent=brl(c);document.getElementById('previewStore').textContent=p==null?'—':brl(p-c)}['saleValue','cost','commissionType','commissionValue'].forEach(id=>document.getElementById(id).addEventListener('input',updatePreview));
+document.getElementById('saleForm').onsubmit=e=>{e.preventDefault();const id=document.getElementById('saleId').value||('s'+Date.now());const obj={id,date:document.getElementById('date').value,product:document.getElementById('product').value.trim(),client:document.getElementById('client').value.trim(),status:document.getElementById('status').value,saleValue:Number(document.getElementById('saleValue').value)||0,cost:document.getElementById('cost').value===''?null:Number(document.getElementById('cost').value),payment:document.getElementById('payment').value,commissionType:document.getElementById('commissionType').value,commissionValue:Number(document.getElementById('commissionValue').value)||0,commissionStatus:document.getElementById('commissionStatus').value,notes:document.getElementById('notes').value.trim()};const ix=db.sales.findIndex(s=>s.id===id);if(ix>=0)db.sales[ix]=obj;else db.sales.push(obj);save();closeModal()};
+function toggleCommission(id){const s=db.sales.find(x=>x.id===id);if(s){s.commissionStatus=s.commissionStatus==='paid'?'pending':'paid';save()}}window.toggleCommission=toggleCommission;
+['dashMonth','salesMonth','salesStatus','commissionMonth'].forEach(id=>document.getElementById(id).addEventListener('change',()=>{renderDashboard();renderSales();renderCommissions()}));document.getElementById('salesSearch').addEventListener('input',renderSales);
+document.getElementById('saveGoals').onclick=()=>{db.goals={revenue:Number(document.getElementById('goalRevenue').value)||0,commission:Number(document.getElementById('goalCommission').value)||0};save();alert('Metas salvas.')};
+function download(name,text,type='application/json'){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([text],{type}));a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)}
+function backup(){download(`epulse-backup-${new Date().toISOString().slice(0,10)}.json`,JSON.stringify(db,null,2))}document.getElementById('backupJson').onclick=backup;document.getElementById('exportBtn').onclick=backup;
+document.getElementById('exportCsv').onclick=()=>{const head=['Data','Produto','Cliente','Venda','Custo','Lucro','Tipo comissão','Valor/regra','Comissão calculada','Comissão recebida','Pagamento','Status','Observações'];const rows=db.sales.map(s=>[s.date,s.product,s.client,s.saleValue,s.cost??'',profit(s)??'',s.commissionType,s.commissionValue,commission(s),s.commissionStatus==='paid'?'Sim':'Não',s.payment,s.status,s.notes]);const csv=[head,...rows].map(r=>r.map(v=>`"${String(v??'').replaceAll('"','""')}"`).join(';')).join('\n');download(`epulse-vendas-${new Date().toISOString().slice(0,10)}.csv`,'\ufeff'+csv,'text/csv;charset=utf-8')};
+document.getElementById('importJsonBtn').onclick=()=>document.getElementById('importJson').click();document.getElementById('importJson').onchange=async e=>{const f=e.target.files[0];if(!f)return;try{const d=JSON.parse(await f.text());if(!d.sales||!Array.isArray(d.sales))throw new Error();if(confirm(`Importar ${d.sales.length} vendas e substituir os dados atuais?`)){db=d;save();alert('Backup importado com sucesso.')}}catch(err){alert('Arquivo de backup inválido.')}e.target.value=''};
+document.getElementById('resetBtn').onclick=()=>{if(confirm('Tem certeza? Isso apagará os dados compartilhados no Firebase. Faça backup antes.')){db={sales:[],goals:{revenue:0,commission:0}};save()}};
+
+
+
+// ===== LOGIN GOOGLE + FIRESTORE =====
+function showAuthMessage(message,isError=false){const el=document.getElementById('authStatus');el.textContent=message;el.classList.toggle('error',!!isError)}
+function isAllowedUser(user){return !!user && user.emailVerified!==false}
+function fillUserUI(user){document.getElementById('userName').textContent=user.displayName||'Conta Google';document.getElementById('userEmail').textContent=user.email||'';const avatar=document.getElementById('userAvatar');avatar.src=user.photoURL||'';avatar.style.display=user.photoURL?'block':'none'}
+function setAuthenticated(ok){document.body.classList.toggle('authenticated',ok);document.body.classList.toggle('auth-loading',!ok)}
+
+async function loadCloudData(){
+  const snap=await getDoc(CLOUD_DOC);
+  if(snap.exists() && snap.data()?.data?.sales){
+    db=snap.data().data;
+  }else{
+    const local=loadLocal();
+    db=local?.sales?.length?local:structuredClone(defaultData);
+    await setDoc(CLOUD_DOC,{data:db,createdAt:serverTimestamp(),updatedAt:serverTimestamp(),updatedBy:currentUser.email},{merge:true});
+  }
+  localStorage.setItem(KEY,JSON.stringify(db));
+  renderAll();
+  setSyncState('ok');
+}
+
+function startCloudListener(){
+  if(stopCloudListener)stopCloudListener();
+  stopCloudListener=onSnapshot(CLOUD_DOC,snap=>{
+    if(!cloudReady||!snap.exists())return;
+    const remote=snap.data()?.data;
+    if(remote?.sales){db=remote;localStorage.setItem(KEY,JSON.stringify(db));renderAll();setSyncState('ok')}
+  },err=>{console.error(err);setSyncState('error')});
+}
+
+async function handleAuthorizedUser(user){
+  currentUser=user;fillUserUI(user);showAuthMessage('Login realizado. Carregando seus dados…');
+  try{await loadCloudData();cloudReady=true;startCloudListener();setAuthenticated(true)}
+  catch(err){console.error(err);showAuthMessage('Login realizado, mas o Firestore recusou o acesso. Publique as novas regras de segurança incluídas no projeto.',true);setAuthenticated(false)}
+}
+
+
+document.getElementById('googleLoginBtn').addEventListener('click',async()=>{
+  showAuthMessage('Abrindo login Google…');
+  try{await signInWithPopup(auth,provider)}catch(err){
+    console.error(err);
+    if(['auth/popup-blocked','auth/cancelled-popup-request','auth/operation-not-supported-in-this-environment'].includes(err.code)){
+      try{await signInWithRedirect(auth,provider)}catch(e){showAuthMessage('Não foi possível abrir o login Google.',true)}
+    }else if(err.code!=='auth/popup-closed-by-user'){showAuthMessage('Falha no login. Confira se Google está ativado no Firebase Authentication e se este domínio está autorizado.',true)}
+  }
+});
+
+document.getElementById('logoutBtn').addEventListener('click',async()=>{cloudReady=false;if(stopCloudListener){stopCloudListener();stopCloudListener=null}await signOut(auth);currentUser=null;setAuthenticated(false);showAuthMessage('Sessão encerrada. Faça login com sua conta Google.')});
+
+getRedirectResult(auth).catch(err=>console.error('Redirect login:',err));
+onAuthStateChanged(auth,async user=>{
+  if(!user){currentUser=null;cloudReady=false;setAuthenticated(false);showAuthMessage('Faça login com sua conta Google.');return}
+  await handleAuthorizedUser(user);
+});
+
+</script>
+</body>
+</html>
